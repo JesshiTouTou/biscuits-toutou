@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐾 Biscuits Maison pour Toutou</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --warm-cream: #FDF6E3;
+            --golden-brown: #C4955A;
+            --deep-cocoa: #5D4037;
+            --soft-terracotta: #E07A5F;
+            --sage-green: #81B29A;
+            --bone-white: #FAF3E0;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--warm-cream);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated background paws */
+        .paw-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.08;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%235D4037' d='M50 65c-8 0-15-7-15-15s7-15 15-15 15 7 15 15-7 15-15 15zm-20-25c-5 0-9-4-9-9s4-9 9-9 9 4 9 9-4 9-9 9zm40 0c-5 0-9-4-9-9s4-9 9-9 9 4 9 9-4 9-9 9zm-50 15c-5 0-8-4-8-8s3-8 8-8 8 4 8 8-3 8-8 8zm60 0c-5 0-8-4-8-8s3-8 8-8 8 4 8 8-3 8-8 8z'/%3E%3C/svg%3E");
+            background-size: 80px 80px;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 20px 20px 40px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 30px 0 20px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dog-emoji {
+            font-size: 4rem;
+            display: block;
+            animation: bounce 2s infinite;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 2.5rem;
+            color: var(--deep-cocoa);
+            margin-top: 10px;
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--soft-terracotta);
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        .for-name {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--soft-terracotta), var(--golden-brown));
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-top: 15px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 15px rgba(224, 122, 95, 0.3);
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 24px;
+            padding: 24px;
+            margin-top: 24px;
+            box-shadow: 0 8px 30px rgba(93, 64, 55, 0.12);
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+
+        .card:nth-child(2) { animation-delay: 0.1s; }
+        .card:nth-child(3) { animation-delay: 0.2s; }
+        .card:nth-child(4) { animation-delay: 0.3s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-title {
+            font-family: 'Caveat', cursive;
+            font-size: 1.7rem;
+            color: var(--deep-cocoa);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 3px dashed var(--bone-white);
+        }
+
+        .card-title span {
+            font-size: 1.5rem;
+        }
+
+        /* Ingredients */
+        .ingredient-group {
+            margin-bottom: 16px;
+        }
+
+        .ingredient-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .group-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--sage-green);
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .group-label::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--sage-green);
+            border-radius: 50%;
+        }
+
+        .ingredient-list {
+            list-style: none;
+        }
+
+        .ingredient-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 14px;
+            background: var(--bone-white);
+            border-radius: 12px;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            color: var(--deep-cocoa);
+            transition: transform 0.2s ease;
+        }
+
+        .ingredient-item:hover {
+            transform: translateX(5px);
+        }
+
+        .ingredient-icon {
+            margin-right: 12px;
+            font-size: 1.2rem;
+        }
+
+        .add-home .group-label {
+            color: var(--soft-terracotta);
+        }
+
+        .add-home .group-label::before {
+            background: var(--soft-terracotta);
+        }
+
+        .add-home .ingredient-item {
+            background: linear-gradient(135deg, rgba(224, 122, 95, 0.1), rgba(224, 122, 95, 0.05));
+            border: 1px dashed var(--soft-terracotta);
+        }
+
+        /* Steps */
+        .step {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 16px;
+            align-items: flex-start;
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--golden-brown), var(--soft-terracotta));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 3px 10px rgba(196, 149, 90, 0.3);
+        }
+
+        .step-text {
+            flex: 1;
+            padding-top: 6px;
+            color: var(--deep-cocoa);
+            line-height: 1.5;
+        }
+
+        .step-highlight {
+            background: linear-gradient(135deg, rgba(129, 178, 154, 0.2), rgba(129, 178, 154, 0.1));
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        /* Footer message */
+        .footer-message {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            animation: fadeInUp 0.6s ease-out 0.4s backwards;
+        }
+
+        .bone-divider {
+            font-size: 2rem;
+            letter-spacing: 10px;
+            margin-bottom: 15px;
+            opacity: 0.6;
+        }
+
+        .footer-text {
+            font-family: 'Caveat', cursive;
+            font-size: 1.4rem;
+            color: var(--deep-cocoa);
+            line-height: 1.4;
+        }
+
+        .santa-note {
+            font-size: 0.9rem;
+            color: var(--golden-brown);
+            margin-top: 12px;
+            font-style: italic;
+        }
+
+        /* Floating bones animation */
+        .floating-bone {
+            position: fixed;
+            font-size: 1.5rem;
+            opacity: 0.15;
+            animation: float 15s infinite linear;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .floating-bone:nth-child(1) { left: 5%; animation-delay: 0s; }
+        .floating-bone:nth-child(2) { left: 25%; animation-delay: -3s; }
+        .floating-bone:nth-child(3) { left: 45%; animation-delay: -6s; }
+        .floating-bone:nth-child(4) { left: 65%; animation-delay: -9s; }
+        .floating-bone:nth-child(5) { left: 85%; animation-delay: -12s; }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 380px) {
+            h1 { font-size: 2rem; }
+            .card { padding: 18px; }
+            .card-title { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="paw-bg"></div>
+    
+    <div class="floating-bone">🦴</div>
+    <div class="floating-bone">🦴</div>
+    <div class="floating-bone">🦴</div>
+    <div class="floating-bone">🦴</div>
+    <div class="floating-bone">🦴</div>
+
+    <div class="container">
+        <header>
+            <span class="dog-emoji">🐕</span>
+            <h1>Biscuits Maison<br>pour Toutou</h1>
+            <p class="subtitle">Une recette pleine d'amour 🐾</p>
+            <span class="for-name">🎁 Pour Jesshini</span>
+        </header>
+
+        <div class="card">
+            <h2 class="card-title"><span>🥣</span> Ingrédients</h2>
+            
+            <div class="ingredient-group">
+                <p class="group-label">Dans ta box</p>
+                <ul class="ingredient-list">
+                    <li class="ingredient-item">
+                        <span class="ingredient-icon">🌾</span>
+                        200 g de farine complète
+                    </li>
+                    <li class="ingredient-item">
+                        <span class="ingredient-icon">🥣</span>
+                        50 g de flocons d'avoine
+                    </li>
+                    <li class="ingredient-item">
+                        <span class="ingredient-icon">🧊</span>
+                        1 cube de bouillon déshydraté (sans sel)
+                    </li>
+                    <li class="ingredient-item">
+                        <span class="ingredient-icon">🥚</span>
+                        1 œuf
+                    </li>
+                </ul>
+            </div>
+
+            <div class="ingredient-group add-home">
+                <p class="group-label">À ajouter chez toi</p>
+                <ul class="ingredient-list">
+                    <li class="ingredient-item">
+                        <span class="ingredient-icon">💧</span>
+                        100 ml d'eau
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title"><span>👩‍🍳</span> Préparation</h2>
+            
+            <div class="step">
+                <div class="step-number">1</div>
+                <p class="step-text">Préchauffe le four à <span class="step-highlight">180°C</span></p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <p class="step-text">Émiette le cube de bouillon dans l'eau chaude et mélange bien</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <p class="step-text">Mélange la farine + flocons + bouillon + œuf jusqu'à obtenir une pâte homogène</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <p class="step-text">Étale la pâte et découpe avec l'emporte-pièce en forme d'os 🦴</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">5</div>
+                <p class="step-text">Enfourne pendant <span class="step-highlight">20 minutes</span>. Laisse refroidir avant de donner à ton chien !</p>
+            </div>
+        </div>
+
+        <div class="footer-message">
+            <div class="bone-divider">🦴 🦴 🦴</div>
+            <p class="footer-text">
+                Joyeuses Fêtes Jesshini ! 🎄<br>
+                Régale bien ton toutou 🐾
+            </p>
+            <p class="santa-note">Julian W 🎅</p>
+        </div>
+    </div>
+</body>
+</html>
